@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package rz.assets.srv.asset;
+
+service AssetMethod {
+	rpc New(Asset) returns (Response) {}
+	rpc QueryByAssetName(Asset) returns (Response) {}
+	rpc UpdateByAssetId(Asset) returns (Response) {}
+	rpc DeleteByAssetId(Asset) returns (Response) {}
+}
+
+message Error {
+	int32 code = 1;
+	string detail = 2;
+}
+
+message Asset {
+	string name = 1;
+	string desc = 2;
+}
+
+message QueryRequest {
+	string name = 1;
+}
+
+message Response {
+	bool success = 1;
+	Error error = 2;
+	int64 assetsId = 3;
+	int32 affectNum = 4;
+	repeated Asset assets= 5;
+}
